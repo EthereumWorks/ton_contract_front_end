@@ -21,7 +21,7 @@ function App() {
   const { connected } = useTonConnect();
 
   const showAlert = () => {
-    WebApp.showAlert(WebApp.colorScheme);
+    WebApp.showAlert("Hey there!");
   };
 
   return (
@@ -47,10 +47,10 @@ function App() {
 
         <a
           onClick={() => {
-            showAlert;
+            showAlert();
           }}
         >
-          showAlert
+          Show Alert
         </a>
 
         <br />
