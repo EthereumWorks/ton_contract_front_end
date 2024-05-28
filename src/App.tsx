@@ -4,6 +4,7 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 import { useMainContract } from "./hooks/useMainContract";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { fromNano } from "ton-core";
+import WebApp from '@twa-dev/sdk'
 
 // EQCPq57zF-QJM20KGUoTIA3bpw82Axa87FLoKYAA60j5ZyOH
 
@@ -19,6 +20,10 @@ function App() {
 
   const { connected } = useTonConnect();
 
+  const showAlert = () => {
+    WebApp.showAlert("Hey there!");
+  };
+
   return (
     <div>
       <div>
@@ -26,6 +31,7 @@ function App() {
       </div>
       <div>
         <div className='Card'>
+          <b>{WebApp.platform}</b>
           <b>Our contract Address</b>
           <div className='Hint'>{contract_address?.slice(0, 30) + "..."}</div>
           <b>Our contract Balance</b>
@@ -39,40 +45,49 @@ function App() {
           <div>{counter_value ?? "Loading..."}</div>
         </div>
 
-        {connected && (
-              <a
-                onClick={() => {
-                  sendIncrement();
-                }}
-              >
-                Increment by 5
-              </a>
-        )}
+        <a
+          onClick={() => {
+            showAlert();
+          }}
+        >
+          Show Alert
+        </a>
 
-        <br/>
+        <br />
 
         {connected && (
-                        <a
-                        onClick={() => {
-                          sendDeposit();
-                        }}
-                      >
-                        Request deposit of 0.1 TON
-                      </a>
+          <a
+            onClick={() => {
+              sendIncrement();
+            }}
+          >
+            Increment by 5
+          </a>
         )}
 
-        <br/>
+        <br />
 
         {connected && (
-                        <a
-                        onClick={() => {
-                          sendWithdrawalRequest();
-                        }}
-                      >
-                        Request  0.07 TON withdrawal
-                      </a>
+          <a
+            onClick={() => {
+              sendDeposit();
+            }}
+          >
+            Request deposit of 1 TON
+          </a>
         )}
 
+        <br />
+
+        {connected && (
+          <a
+            onClick={() => {
+              sendWithdrawalRequest();
+            }}
+          >
+            Request 0.7 TON withdrawal
+          </a>
+        )}
       </div>
     </div>
   );
